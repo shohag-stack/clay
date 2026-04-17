@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image';
 import footerData from '../Data/footer'
 import FooterLink from '../components/FooterLink';
+import Link from 'next/link';
 
 export default function Footer() {
     const logo = "/images/clay-white.svg"; // Update with your logo path
@@ -22,7 +23,7 @@ export default function Footer() {
         </div>
         <div>
             <div className='text-center text-white py-4 border-t border-white/10'>
-                <p className='text-md'>© 2025 Urban. All rights reserved.</p>
+                <p className='text-md'>© 2026 <Link className='text-blue-500 hover:text-white' href={'https://rayso.studio/'} > Rayso.studio </Link>. All rights reserved.</p>
             </div>
         </div>
     </div>

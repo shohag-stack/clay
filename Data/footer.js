@@ -1,46 +1,39 @@
 const footerData = [
-    {
-        title: "Resources",
-        links: [
-        { name: "Home", href: "/" },
-        { name: "About us", href: "/about" },
-        { name: "Restaurant", href: "/restaurant" },
-        { name: "Contact us", href: "/contact" },
-        { name: "Signature Menus", href: "/signature-menus" }
-    ]
-    }, 
-    {
-        title: "About Us",
-        links: [
-        { name: "Home", href: "/" },
-        { name: "About us", href: "/about" },
-        { name: "Restaurant", href: "/restaurant" },
-        { name: "Contact us", href: "/contact" },
-        { name: "Signature Menus", href: "/signature-menus" }
-    ]
-    }, 
-    {
-        title: "Category",
-        links: [
-        { name: "Home", href: "/" },
-        { name: "About us", href: "/about" },
-        { name: "Restaurant", href: "/restaurant" },
-        { name: "Contact us", href: "/contact" },
-        { name: "Signature Menus", href: "/signature-menus" }
-    ]
-    }, {
-        title: "New York",
-        links: [
-        { name: "Home", href: "/" },
-        { name: "About us", href: "/about" },
-        { name: "Restaurant", href: "/restaurant" },
-        { name: "Contact us", href: "/contact" },
-        { name: "Signature Menus", href: "/signature-menus" }
-    ]
-    }, 
+  {
+    title: "Company",
+    links: [
+      { name: "About Us", href: "/about" },
+      { name: "Careers", href: "/careers" },
+      { name: "Blog", href: "/blog" },
+      { name: "Contact", href: "/contact" },
+    ],
+  },
+  {
+    title: "Properties",
+    links: [
+      { name: "Buy Property", href: "/" },
+      { name: "Rent Property", href: "/" },
+      { name: "Commercial", href: "/" },
+      { name: "Luxury Homes", href: "/" },
+    ],
+  },
+  {
+    title: "Support",
+    links: [
+      { name: "Help Center", href: "/" },
+      { name: "Terms of Service", href: "/" },
+      { name: "Privacy Policy", href: "/" },
+      { name: "FAQs", href: "/faq" },
+    ],
+  },
+  {
+    title: "Contact",
+    links: [
+      { name: "123 Main Street, New York, NY", href: "#" },
+      { name: "+1 (123) 456-7890", href: "tel:+11234567890" },
+      { name: "info@yourcompany.com", href: "mailto:info@yourcompany.com" },
+    ],
+  },
+];
 
-]
-
-
-module.exports = footerData
-
+export default footerData;
