@@ -1,21 +1,14 @@
-// sanity/lib/client.ts
 import { createClient } from "next-sanity";
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
+const isSanityReady =
+  !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
+  !!process.env.NEXT_PUBLIC_SANITY_DATASET;
 
-export const sanityEnabled = !!projectId && !!dataset;
-
-export const client = sanityEnabled
+export const client = isSanityReady
   ? createClient({
-      projectId: projectId!,
-      dataset: dataset!,
+      projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+      dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
       apiVersion: "2024-01-01",
       useCdn: true,
     })
-  : createClient({
-      projectId: "demo",
-      dataset: "production",
-      apiVersion: "2024-01-01",
-      useCdn: false,
-    });
+  : null;

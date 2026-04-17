@@ -1,5 +1,7 @@
 import { client } from "./client";
 
-export const sanityFetch = (query: string, params = {}) => {
+export const sanityFetch = async (query: string, params = {}) => {
+  if (!client) return null;
+
   return client.fetch(query, params);
 };
