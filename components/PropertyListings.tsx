@@ -1,109 +1,119 @@
-'use client'
-import React, { useState, Suspense } from 'react'
-import PropertyCardHorizontal from '@/components/cards/PropertyCardHorizontal'
-import PropertyCard from '@/components/cards/PropertyCard'
-import ToggleButton from '@/components/ToggleButton'
-import property from '../public/Data/property'
-import { useSearchParams } from 'next/navigation'
-import PropertyMap from '@/components/PropertyMap'
-import Property from '@/public/types/types'
-import { APIProvider } from '@vis.gl/react-google-maps'
-import PropertyListingsLoading from './PropertyListingsLoading'
+"use client";
+import React, { useState, Suspense } from "react";
+import PropertyCardHorizontal from "@/components/cards/PropertyCardHorizontal";
+import PropertyCard from "@/components/cards/PropertyCard";
+import ToggleButton from "@/components/ToggleButton";
+import property from "../Data/property";
+import { useSearchParams } from "next/navigation";
+import PropertyMap from "@/components/PropertyMap";
+import Property from "@/types/types";
+import { APIProvider } from "@vis.gl/react-google-maps";
+import PropertyListingsLoading from "./PropertyListingsLoading";
 
-function ListingsContent() {
-    const [view, setView] = useState('list')
-    const searchParams = useSearchParams()
-    const transactionType = searchParams.get('transactionType')
-    const beds = searchParams.get('beds')
-    const minPrice = searchParams.get('minPrice')
-    const homeType = searchParams.get('homeTypes')
-    const [hoverProperty, setHoverProperty] = useState<Property | null>(null)
-    const mapKey = process.env.NEXT_PUBLIC_MAP_KEY || ''
+function ListingsContent({ t }: { t: Property[] }) {
+  const [view, setView] = useState("list");
+  const searchParams = useSearchParams();
+  const transactionType = searchParams.get("transactionType");
+  const beds = searchParams.get("beds");
+  const minPrice = searchParams.get("minPrice");
+  const homeType = searchParams.get("homeTypes");
+  const [hoverProperty, setHoverProperty] = useState<Property | null>(null);
+  const mapKey = process.env.NEXT_PUBLIC_MAP_KEY || "";
 
-    const parsePriceRange = (priceRange: string | null) => {
-        if (!priceRange) return { min: 0, max: Infinity }
+  const parsePriceRange = (priceRange: string | null) => {
+    if (!priceRange) return { min: 0, max: Infinity };
 
-        if (priceRange.includes('-')) {
-            const [min, max] = priceRange.split('-')
-            return {
-                min: parseInt(min) || 0,
-                max: max.endsWith('+') ? Infinity : parseInt(max) || Infinity
-            }
-        } else if (priceRange.endsWith('+')) {
-            return {
-                min: parseInt(priceRange.replace('+', '')) || 0,
-                max: Infinity
-            }
-        }
-
-        return { min: 0, max: Infinity }
+    if (priceRange.includes("-")) {
+      const [min, max] = priceRange.split("-");
+      return {
+        min: parseInt(min) || 0,
+        max: max.endsWith("+") ? Infinity : parseInt(max) || Infinity,
+      };
+    } else if (priceRange.endsWith("+")) {
+      return {
+        min: parseInt(priceRange.replace("+", "")) || 0,
+        max: Infinity,
+      };
     }
 
-    const filteredProperty = property.filter((p) => {
-        const priceRange = parsePriceRange(minPrice)
-        return (
-            (!transactionType || transactionType.toLowerCase() === p.transaction_type.toLowerCase()) &&
-            (!beds || parseInt(beds) === p.bedrooms) &&
-            (!minPrice || (parseInt(p.price.replace(/[^0-9]/g, '')) >= priceRange.min && parseInt(p.price.replace(/[^0-9]/g, '')) <= priceRange.max)) &&
-            (!homeType || homeType.toLowerCase() === p.type.toLowerCase())
-        )
-    })
+    return { min: 0, max: Infinity };
+  };
 
-    const totalProperty = filteredProperty.length
+  const filteredProperty = t.filter((p) => {
+    const priceRange = parsePriceRange(minPrice);
+
+    const priceValue = Number(p.price ?? 0);
 
     return (
-        <div className='bg-gray'>
-            <div className='section pt-10'>
-                <div className='flex justify-between items-center py-4'>
-                    <div>
-                        <h6>Viewing {totalProperty} Homes {transactionType ? ` for ${transactionType}` : ""} in New York</h6>
-                        <p className='md:text-md text-md'>Showing listings marketed by all brokers in the searched area.</p>
-                    </div>
-                    <div className='items-end'>
-                        <ToggleButton options={["List", "Map"]} onChange={setView} />
-                    </div>
-                </div>
+      (!transactionType ||
+        transactionType.toLowerCase() === p.transactionType.toLowerCase()) &&
+      (!beds || parseInt(beds) === p.bedrooms) &&
+      (!minPrice ||
+        (priceValue >= priceRange.min && priceValue <= priceRange.max)) &&
+      (!homeType || homeType.toLowerCase() === p.type.toLowerCase())
+    );
+  });
 
-                {
-                    view === "list" ? (
-                        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6`}>
-                            {
-                                filteredProperty.map((property, idx) => {
-                                    return (
-                                        <PropertyCard key={idx} property={property} />
-                                    )
-                                })
-                            }
-                        </div>
-                    ) : (
-                        <div className={`flex md:flex-row flex-col relative gap-15`}>
-                            <div className='hidden md:flex md:flex-1/2 flex-col gap-y-2 overflow-y-scroll'>
-                                {
-                                    filteredProperty.map((property, idx) => {
-                                        return (
-                                            <PropertyCardHorizontal key={idx} hoverProperty={setHoverProperty} property={property} />
-                                        )
-                                    })
-                                }
-                            </div>
-                            <div className='md:flex-1/2 w-full h-[80vh] md:sticky top-30'>
-                                <APIProvider apiKey={mapKey}>
-                                    <PropertyMap hoverProperty={hoverProperty} filteredProperty={filteredProperty} />
-                                </APIProvider>
-                            </div>
-                        </div>
-                    )
-                }
-            </div>
+  const totalProperty = filteredProperty.length;
+
+  return (
+    <div className="bg-gray">
+      <div className="section pt-10">
+        <div className="flex justify-between items-center py-4">
+          <div>
+            <h6>
+              Viewing {totalProperty} Homes{" "}
+              {transactionType ? ` for ${transactionType}` : ""} in New York
+            </h6>
+            <p className="md:text-md text-md">
+              Showing listings marketed by all brokers in the searched area.
+            </p>
+          </div>
+          <div className="items-end">
+            <ToggleButton options={["List", "Map"]} onChange={setView} />
+          </div>
         </div>
-    )
+
+        {view === "list" ? (
+          <div
+            className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6`}
+          >
+            {filteredProperty.map((property, idx) => {
+              return <PropertyCard key={idx} property={property} />;
+            })}
+          </div>
+        ) : (
+          <div className={`flex md:flex-row flex-col relative gap-15`}>
+            <div className="hidden md:flex md:flex-1/2 flex-col gap-y-2 overflow-y-scroll">
+              {filteredProperty.map((property, idx) => {
+                return (
+                  <PropertyCardHorizontal
+                    key={idx}
+                    hoverProperty={setHoverProperty}
+                    property={property}
+                  />
+                );
+              })}
+            </div>
+            <div className="md:flex-1/2 w-full h-[80vh] md:sticky top-30">
+              <APIProvider apiKey={mapKey}>
+                <PropertyMap
+                  hoverProperty={hoverProperty}
+                  filteredProperty={filteredProperty}
+                />
+              </APIProvider>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
-
-export function PropertyListings() {
-    return (
-        <Suspense fallback={<PropertyListingsLoading />}>
-            <ListingsContent />
-        </Suspense>
-    )
+export function PropertyListings({ property }: { property: Property[] }) {
+  return (
+    <Suspense fallback={<PropertyListingsLoading />}>
+      <ListingsContent t={property} />
+    </Suspense>
+  );
 }

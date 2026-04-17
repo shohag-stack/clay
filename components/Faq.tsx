@@ -1,4 +1,4 @@
-import faq from "../public/Data/faq";
+import faq from "../Data/faq";
 import Accordion from "./Accordion";
 
 export default function Faq() {

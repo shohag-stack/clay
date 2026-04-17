@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Urban Real estate Agent",
+  title: "Clay Real estate Agent",
   description: "Your Trusted Real Estate Agent is in Your DoorStep",
 };
 
@@ -18,7 +18,7 @@ const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
 });
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -26,9 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${manrope.variable} ${bricolage.variable}`}>
-        <Navbar />
         {children}
-        <Footer />
       </body>
     </html>
   );

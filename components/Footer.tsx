@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image';
-import footerData from '../public/Data/footer'
+import footerData from '../Data/footer'
 import FooterLink from '../components/FooterLink';
 
 export default function Footer() {

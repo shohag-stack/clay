@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
-import Property from "../../public/types/types";
+import Property from "../../types/types";
 import Link from 'next/link';
 
 export interface PropertyCardProps {
@@ -17,7 +17,7 @@ export default function PropertyCardHorizontal({ property, hoverProperty }: Prop
     const [active, setActive] = useState(false)
 
     return (
-        <Link href={`/listings/${property.href}`}>
+        <Link href={`/listings/${property.slug.current}`}>
         <div className={`overflow-hidden flex ${active ? "bg-amber-50" : "bg-white border-none"} items-center`} key={property.id}
         
         onMouseEnter={() => {
@@ -29,7 +29,7 @@ export default function PropertyCardHorizontal({ property, hoverProperty }: Prop
                 setActive(false);
             }} >
             <div className='px-2 py-2 overflow-hidden'>
-                <Image src={property.image} alt={property.title} width={200} height={200} className="w-[260] h-[200] object-cover hover:scale-105 transition-all ease-in-out duration-500" />
+                <Image src={property.mainImage.asset.url} alt={property.title} width={200} height={200} className="w-[260] h-[200] object-cover hover:scale-105 transition-all ease-in-out duration-500" />
             </div>
             <div className="p-4">
                     <div className="items-center justify-between gap-6">

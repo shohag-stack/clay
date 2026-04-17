@@ -1,5 +1,5 @@
 import React from 'react'
-import statistics from '../public/Data/statistics'
+import statistics from '../Data/statistics'
 import ImageLeftToRightSlide from './animation/ImageLeftToRightSlide'
 
 export default function Statistics() {

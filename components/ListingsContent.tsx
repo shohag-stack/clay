@@ -3,10 +3,10 @@ import React, { useState, Suspense } from 'react'
 import PropertyCardHorizontal from '@/components/cards/PropertyCardHorizontal'
 import PropertyCard from '@/components/cards/PropertyCard'
 import ToggleButton from '@/components/ToggleButton'
-import property from '../public/Data/property'
+import property from '../Data/property'
 import { useSearchParams } from 'next/navigation'
 import PropertyMap from '@/components/PropertyMap'
-import Property from '@/public/types/types'
+import Property from '@/types/types'
 import { APIProvider } from '@vis.gl/react-google-maps'
 
 export default function ListingsContent() {

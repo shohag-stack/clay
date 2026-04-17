@@ -14,8 +14,9 @@ export default function Contact() {
                     <h2>Contact</h2>
                 </div>
             </div>
-            <div className='relative'>
-                <Image alt='contact' src={"https://images.unsplash.com/photo-1647579350413-a6ada4e480ed?q=80&w=1625&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} width={1080} height={1920} className='w-full object-cover' />
+            <div className='relative w-full h-screen'>
+                {/* <Image alt='contact' src={"https://images.unsplash.com/photo-1647579350413-a6ada4e480ed?q=80&w=1625&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} width={1080} height={1920} className='w-full object-cover' /> */}
+                <video src={'/videos/hero.mp4'} loop autoPlay muted className='w-full h-full delay-75' />
             </div>
             <div className='bg-gray'>
                 <div className='section'>

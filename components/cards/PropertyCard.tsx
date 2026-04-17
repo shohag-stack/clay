@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image';
-import Property from "../../public/types/types";
+import Property from "../../types/types";
 import Link from 'next/link';
 
 export interface PropertyCardProps {
@@ -13,12 +13,13 @@ export default function PropertyCard({property} : PropertyCardProps) {
     const bed = "icon/bed.svg";
     const map = "icon/map.svg";
     const home = "icon/home.svg";
+
     
     return (
-        <Link href={`/listings/${property.href}`}>
-        <div className="overflow-hidden h-full bg-white" key={property.id}>
-            <div className='overflow-hidden'>
-                <Image src={property.image} alt={property.title} width={424} height={460} className="w-full h-[250] object-cover hover:scale-105 transition-all ease-in-out duration-500" />
+        <Link href={`/listings/${property.slug?.current}`}>
+        <div className="overflow-hidden h-full bg-white" key={property._id}>
+            <div className='overflow-hidden aspect-4/3 w-full'>
+                <Image src={property.mainImage?.asset.url} alt={property.title} width={424} height={460} className="w-full h-full object-cover hover:scale-105 transition-all ease-in-out duration-500" />
             </div>
             <div className="p-4 bg-white">
                 

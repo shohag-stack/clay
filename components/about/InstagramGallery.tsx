@@ -10,6 +10,7 @@ export default function InstagramGallery() {
         "/images/image41.png", 
         "/images/image42.png"
     ]
+    
   return (
     <div className=' pt-15 md:pt-30 pb-0'>
         <div className="w-full overflow-hidden group">

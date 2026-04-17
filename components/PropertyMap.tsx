@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {AdvancedMarker, Map, InfoWindow, useMap} from '@vis.gl/react-google-maps';
-import Property from '@/public/types/types';
+import Property from '@/types/types';
 import {MapPinCheckInside} from "lucide-react"
 import Image from 'next/image';
 import Link from 'next/link';

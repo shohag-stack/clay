@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 import { CircleChevronUp} from "lucide-react"; // Install: npm i lucide-react
-import faq from "../public/Data/faq";
-
+import faq from "../Data/faq";
 
 export default function Accordion({ items } : { items: typeof faq }) {
   const [openIndex, setOpenIndex] = useState<number | null >(null);
@@ -35,7 +34,7 @@ export default function Accordion({ items } : { items: typeof faq }) {
             }`}
           >
             <div className="overflow-hidden">
-              <p className="py-4 text-gray-600 text-md">{item.content}</p>
+              <p className="py-4 text-gray-600 text-md md:text-xl">{item.content}</p>
             </div>
           </div>
         </div>

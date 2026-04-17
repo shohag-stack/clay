@@ -1,8 +1,10 @@
+'use client'
 import useEmblaCarousel from 'embla-carousel-react'
 import React, { useCallback } from 'react'
 import Image from 'next/image'
+import { SliderImage } from '@/types/types'
 
-export default function PropertySlider({sliders} : {sliders: string[]}) {
+export default function PropertySlider({sliders} : {sliders: SliderImage[]}) {
 
 
     const [emblaImageRef, emblaApi] = useEmblaCarousel({
@@ -24,9 +26,21 @@ export default function PropertySlider({sliders} : {sliders: string[]}) {
             <div className='embla'>
                 <div className='embla__viewport' ref={emblaImageRef}>
                     <div className='embla__container'>
-                        {sliders.map((item, idx)=> {
-                           return  <div className='w-full embla_slide overflow-hidden relative  h-[200px] md:h-[500]' key={idx}> <Image className='w-full' src={item} fill alt={idx.toString()} objectFit='cover' /> </div>
-                        })}
+                        {sliders.map((item, idx) => (
+                                <div
+                                    className="w-full embla_slide overflow-hidden relative h-[200px] md:h-[500px]"
+                                    key={idx}
+                                >
+                                    {item?.asset?.url && (
+                                    <Image
+                                        src={item.asset.url}
+                                        fill
+                                        alt={idx.toString()}
+                                        className="object-cover"
+                                    />
+                                    )}
+                                </div>
+                                ))}
                     </div>
                 </div>
             </div>
@@ -34,20 +48,22 @@ export default function PropertySlider({sliders} : {sliders: string[]}) {
             <div className='embla embla_thumb py-2'>
                 <div className='embla__viewport' ref={emblaThumbRef}>
                     <div className='embla__container'>
-                        {sliders.map((src, index) => (
-                            <div
-                                key={index}
-                                className="embla_slide cursor-pointer relative h-[100px] w-[150px] mr-2"
-                                onClick={() => onThumbClick(index)}
-                            >
-                                <Image
-                                src={src}
-                                alt={`Thumbnail ${index + 1}`}
-                                fill
-                                className="object-cover"
-                                />
-                            </div>
-                            ))}
+                        {sliders.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="embla_slide cursor-pointer relative h-[100px] w-[150px] mr-2"
+                                    onClick={() => onThumbClick(index)}
+                                >
+                                    {item?.asset?.url && (
+                                    <Image
+                                        src={item.asset.url}
+                                        alt={`Thumbnail ${index + 1}`}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                    )}
+                                </div>
+                                ))}
                     </div>
                 </div>
             </div>

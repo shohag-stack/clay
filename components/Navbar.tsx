@@ -8,9 +8,9 @@ export default function Navbar() {
     const logo = "/images/clay.svg";
     
     return (
-        <div className="container bg-gray-100/50 mx-auto top-0 md:top-5 md:left-0 md:right-0 z-40 backdrop-blur-xl md:rounded-full fixed">
+        <div className="container bg-white/90 mx-auto top-0 md:top-5 md:left-0 md:right-0 z-40 backdrop-blur-xl md:rounded-2xl fixed">
             <header>
-                <nav className="w-full py-4 px-4 md:px-7">
+                <nav className="w-full py-2 px-2 md:px-2">
                     {/* Desktop Layout */}
                     <div className="hidden lg:grid lg:grid-cols-3 lg:gap-5 lg:items-center">
                         <div>
@@ -38,7 +38,7 @@ export default function Navbar() {
                             </ul>
                         </div>
                         <div className="text-right">
-                            <button className="btn-secondary">Contact us</button>
+                            <Link href={'/contact'} className="btn-territory">Contact us</Link>
                         </div>
                     </div>
 
