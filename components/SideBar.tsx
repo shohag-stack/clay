@@ -55,7 +55,7 @@ export default function SideBar({ agent }: AgentProps) {
               width={100}
               height={100}
               alt="agent"
-              className="object-cover rounded-full"
+              className="object-cover rounded-full h-full w-full"
             />
           ) : (
             <div className="w-full h-full bg-gray-300 flex items-center justify-center">
